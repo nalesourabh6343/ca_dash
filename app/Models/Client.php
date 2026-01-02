@@ -17,4 +17,9 @@ class Client extends Model
      * Everything else is mass assignable
      */
     protected $guarded = ['client_id'];
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'client_service', 'client_id', 'service_id');
+    }
 }

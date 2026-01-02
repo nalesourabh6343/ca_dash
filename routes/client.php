@@ -4,6 +4,7 @@ use App\Http\Controllers\client\ClientController;
 use App\Http\Controllers\client\ProfileController;
 use App\Http\Controllers\client\DocumentController;
 use App\Http\Controllers\client\DocumentCategoryController;
+use App\Http\Controllers\client\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'client'])->group(function () {
@@ -49,6 +50,10 @@ Route::middleware(['auth', 'client'])->group(function () {
     Route::get('/client/client/trash', [ClientController::class, 'trash'])->name('client.client.trash');
     Route::get('/client/client/restore/{id}', [ClientController::class, 'restore'])->name('client.client.restore');
     Route::get('/client/client/force-delete/{id}', [ClientController::class, 'forceDelete'])->name('client.client.forceDelete');
+
+    // ================== Service Routes (Selection) ==================
+    Route::get('/client/services', [ServiceController::class, 'index'])->name('client.services.index');
+    Route::post('/client/services', [ServiceController::class, 'update'])->name('client.services.update');
 
 });
 require __DIR__ . '/auth.php';

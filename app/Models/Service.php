@@ -13,4 +13,9 @@ class Service extends Model
     protected $primaryKey = 'service_id';
 
     protected $guarded = ['service_id'];
+
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class, 'client_service', 'service_id', 'client_id');
+    }
 }

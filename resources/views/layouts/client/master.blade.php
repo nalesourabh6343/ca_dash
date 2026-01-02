@@ -84,6 +84,11 @@
                 </a>
 
                 <!-- Documents Menu -->
+                <a href="{{ route('client.services.index') }}" 
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('client.services.index') ? 'bg-slate-800 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                    <i class="fa-solid fa-list-check w-5"></i> My Services
+                </a>
+
                 <div x-data="{ open: {{ request()->routeIs('client.document.*') ? 'true' : 'false' }} }">
                     <button @click="open = !open"
                         class="w-full flex items-center justify-between px-4 py-3 rounded-xl transition-colors duration-200
