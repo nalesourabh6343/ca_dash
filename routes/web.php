@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 require base_path('routes/admin.php');
+require base_path('routes/client.php');
+require base_path('routes/staff.php');
 
 // Route::get('/dashboard', function () {
 //     return redirect()->route('admin.dashboard');
