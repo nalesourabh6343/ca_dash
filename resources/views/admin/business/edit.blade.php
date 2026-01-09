@@ -28,12 +28,18 @@
 
                     <!-- Client Name -->
                     <div>
-                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Client Name <span
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Select Client <span
                                 class="text-red-500">*</span></label>
-                        <input type="text" name="client_name" value="{{ old('client_name', $business->client_name) }}"
-                            required
+                        <select name="client_id" required
                             class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:ring-blue-500 focus:border-blue-500">
-                        @error('client_name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                            <option value="">-- Select Client --</option>
+                            @foreach($clients as $client)
+                                <option value="{{ $client->client_id }}" {{ (old('client_id', $business->client_id) == $client->client_id) ? 'selected' : '' }}>
+                                    {{ $client->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('client_id') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                     </div>
 
                     <!-- GST Number -->

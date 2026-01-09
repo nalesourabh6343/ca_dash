@@ -8,9 +8,6 @@
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
             <h1 class="text-2xl font-bold text-slate-800 dark:text-white">Client Details: {{ $client->name }}</h1>
-             <a href="{{ route('admin.client.edit', $client->client_id) }}" class="ml-auto px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
-                <i class="fa-solid fa-pen mr-2"></i> Edit Client
-            </a>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -21,16 +18,6 @@
                     <h2 class="text-lg font-semibold text-slate-800 dark:text-white mb-4 border-b border-slate-100 dark:border-slate-700 pb-2">
                         <i class="fa-regular fa-id-card mr-2 text-blue-500"></i> Basic Information
                     </h2>
-                    <div class="flex flex-col items-center mb-4">
-                        @if($client->image)
-                            <img src="{{ Storage::url($client->image) }}" alt="Client Image" class="w-24 h-24 rounded-full object-cover shadow-sm mb-2">
-                        @else
-                            <div class="w-24 h-24 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-500 text-3xl mb-2">
-                                <i class="fa-solid fa-user"></i>
-                            </div>
-                        @endif
-                        <h3 class="text-xl font-bold text-slate-800 dark:text-white">{{ $client->name }}</h3>
-                    </div>
                     <div class="space-y-3 text-sm">
                         <div class="flex justify-between">
                             <span class="text-slate-500">Email:</span>
@@ -159,12 +146,9 @@
                                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>
                                             @endif
                                         </td>
-                                        <td class="px-6 py-3 text-right space-x-2">
+                                        <td class="px-6 py-3 text-right">
                                             <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank" class="text-blue-600 hover:text-blue-800" title="View File">
                                                 <i class="fa-solid fa-eye"></i>
-                                            </a>
-                                            <a href="{{ asset('storage/' . $doc->file_path) }}" download class="text-green-600 hover:text-green-800" title="Download File">
-                                                <i class="fa-solid fa-download"></i>
                                             </a>
                                         </td>
                                     </tr>

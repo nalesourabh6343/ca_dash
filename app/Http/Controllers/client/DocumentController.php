@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Document;
 use App\Models\DocumentCategory;
+use App\Models\Client;
 use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
@@ -45,6 +46,14 @@ class DocumentController extends Controller
         ]);
 
         $document = new Document();
+
+        // Link document to the logged-in client
+        $user = auth()->user();
+        $client = Client::where('email', $user->email)->first();
+        if ($client) {
+            $document->client_id = $client->client_id;
+        }
+
         $document->pk_document_categorie_id = $request->pk_document_categorie_id;
         $document->file_name = $request->file_name;
         $document->period_start = $request->period_start;

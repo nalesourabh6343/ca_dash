@@ -46,19 +46,19 @@
                                     <div class="text-xs text-slate-500">{{ Str::limit($doc->description, 30) }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{-- Assuming relationship, else just ID --}}
-                                    {{ $doc->pk_document_categorie_id }}
+                                    {{ $doc->category->name ?? $doc->pk_document_categorie_id }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ \Carbon\Carbon::parse($doc->period_start)->format('M Y') }} -
                                     {{ \Carbon\Carbon::parse($doc->period_end)->format('M Y') }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span class="px-2 py-1 text-xs rounded-full 
-                                                {{ $doc->status == 'approved' ? 'bg-green-100 text-green-700' : '' }}
-                                                {{ $doc->status == 'pending' ? 'bg-amber-100 text-amber-700' : '' }}
-                                                {{ $doc->status == 'rejected' ? 'bg-red-100 text-red-700' : '' }}
-                                                {{ $doc->status == 'reviewed' ? 'bg-blue-100 text-blue-700' : '' }}">
+                                    <span
+                                        class="px-2 py-1 text-xs rounded-full 
+                                                                {{ $doc->status == 'approved' ? 'bg-green-100 text-green-700' : '' }}
+                                                                {{ $doc->status == 'pending' ? 'bg-amber-100 text-amber-700' : '' }}
+                                                                {{ $doc->status == 'rejected' ? 'bg-red-100 text-red-700' : '' }}
+                                                                {{ $doc->status == 'reviewed' ? 'bg-blue-100 text-blue-700' : '' }}">
                                         {{ ucfirst($doc->status) }}
                                     </span>
                                 </td>

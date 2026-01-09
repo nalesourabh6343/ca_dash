@@ -1,10 +1,10 @@
-@extends('layouts.client.master')
+@extends('layouts.admin.master')
 @section('title', 'Edit Client')
 
 @section('content')
     <div class="container mx-auto max-w-4xl">
         <div class="flex items-center gap-4 mb-6">
-            <a href="{{ route('client.client.index') }}"
+            <a href="{{ route('admin.client.index') }}"
                 class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition">
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
@@ -12,7 +12,7 @@
         </div>
 
         <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
-            <form action="{{ route('client.client.update', $client->client_id) }}" method="POST"
+            <form action="{{ route('admin.client.update', $client->client_id) }}" method="POST"
                 enctype="multipart/form-data" class="space-y-6">
                 @csrf
 

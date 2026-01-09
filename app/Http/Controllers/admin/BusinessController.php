@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Business;
+use App\Models\Client;
 
 class BusinessController extends Controller
 {
@@ -13,7 +14,7 @@ class BusinessController extends Controller
      */
     public function index()
     {
-        $businesses = Business::latest()->get();
+        $businesses = Business::with('client')->latest()->get();
         return view('admin.business.index', compact('businesses'));
     }
 
@@ -22,7 +23,8 @@ class BusinessController extends Controller
      */
     public function create()
     {
-        return view('admin.business.create');
+        $clients = Client::all();
+        return view('admin.business.create', compact('clients'));
     }
 
     /**
@@ -32,7 +34,7 @@ class BusinessController extends Controller
     {
         $request->validate([
             'business_name' => 'required|string|max:255',
-            'client_name' => 'required|string|max:255',
+            'client_id' => 'required|exists:clients,client_id',
             'gst_number' => 'nullable|string|max:50',
             'pan_number' => 'nullable|string|max:50',
             'financial_year' => 'required|string|max:20',
@@ -41,7 +43,20 @@ class BusinessController extends Controller
 
         $business = new Business();
         $business->business_name = $request->business_name;
-        $business->client_name = $request->client_name;
+        $business->client_id = $request->client_id;
+        // Client name is now derived from the relationship, but if we need to store it for historical reasons (denormalization) we could,
+        // but typically with a relation we don't. I will assume we drop storing client_name directly or let it be null.
+        // However, the model might still have client_name column.
+        // Ideally we should migrate to remove client_name, but for now I will just use client_id.
+        // If the table strictly requires client_name and it's not nullable, I might need to fetch it.
+        // Let's assume standard normalization. if strict SQL mode is on and client_name is not null strings, this might fail if I don't set it.
+        // I will check the migration if I could... but I can't check migration history easily without finding the file.
+        // Safest bet: Set client_name to the client's name just in case, or leave it if nullable.
+        // Re-reading user request: "select client add this field on business". Matches standard foreign key pattern.
+
+        $client = Client::find($request->client_id);
+        $business->client_name = $client->name; // Keeping this for backward compatibility if the column exists/is required.
+
         $business->gst_number = $request->gst_number;
         $business->pan_number = $request->pan_number;
         $business->financial_year = $request->financial_year;
@@ -60,7 +75,8 @@ class BusinessController extends Controller
         if (!$business) {
             return redirect()->route('admin.business.index')->with('error', "Business Not Found");
         }
-        return view('admin.business.edit', compact('business'));
+        $clients = Client::all();
+        return view('admin.business.edit', compact('business', 'clients'));
     }
 
     /**
@@ -70,7 +86,7 @@ class BusinessController extends Controller
     {
         $request->validate([
             'business_name' => 'required|string|max:255',
-            'client_name' => 'required|string|max:255',
+            'client_id' => 'required|exists:clients,client_id',
             'gst_number' => 'nullable|string|max:50',
             'pan_number' => 'nullable|string|max:50',
             'financial_year' => 'required|string|max:20',
@@ -81,7 +97,11 @@ class BusinessController extends Controller
 
         if ($business) {
             $business->business_name = $request->business_name;
-            $business->client_name = $request->client_name;
+            $business->client_id = $request->client_id;
+
+            $client = Client::find($request->client_id);
+            $business->client_name = $client->name; // Update denormalized name if used
+
             $business->gst_number = $request->gst_number;
             $business->pan_number = $request->pan_number;
             $business->financial_year = $request->financial_year;
@@ -114,7 +134,7 @@ class BusinessController extends Controller
      */
     public function trash()
     {
-        $businesses = Business::onlyTrashed()->latest()->get();
+        $businesses = Business::onlyTrashed()->with('client')->latest()->get();
         return view('admin.business.trash', compact('businesses'));
     }
 

@@ -84,38 +84,18 @@
                 </a>
 
                 <!-- Documents Menu -->
-                <a href="{{ route('client.services.index') }}" 
+                <a href="{{ route('client.services.index') }}"
                     class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('client.services.index') ? 'bg-slate-800 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                     <i class="fa-solid fa-list-check w-5"></i> My Services
                 </a>
 
-                <div x-data="{ open: {{ request()->routeIs('client.document.*') ? 'true' : 'false' }} }">
-                    <button @click="open = !open"
-                        class="w-full flex items-center justify-between px-4 py-3 rounded-xl transition-colors duration-200
-                        {{ request()->routeIs('client.document.*') ? 'text-white bg-slate-800' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-folder-open w-5"></i>
-                            <span>Documents</span>
-                        </div>
-                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200"
-                            :class="open ? 'rotate-180' : ''"></i>
-                    </button>
 
-                    <div x-show="open" x-cloak class="pl-12 pr-2 py-2 space-y-1">
-                        <a href="{{ route('client.document.index') }}"
-                            class="block py-2 text-sm hover:text-white {{ request()->routeIs('client.document.index') ? 'text-blue-400' : 'text-slate-400' }}">
-                            All Documents
-                        </a>
-                        <a href="{{ route('client.document.create') }}"
-                            class="block py-2 text-sm hover:text-white {{ request()->routeIs('client.document.create') ? 'text-blue-400' : 'text-slate-400' }}">
-                            Add New
-                        </a>
-                        <a href="{{ route('client.document.trash') }}"
-                            class="block py-2 text-sm hover:text-white {{ request()->routeIs('client.document.trash') ? 'text-blue-400' : 'text-slate-400' }}">
-                            Trash
-                        </a>
-                    </div>
-                </div>
+                 <!-- Business Menu -->
+                <a href="{{ route('client.business.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('client.business.index') ? 'bg-slate-800 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                    <i class="fa-solid fa-building w-5"></i> My Business
+                </a>
+
 
                 <!-- Document Categories Menu -->
                 <div x-data="{ open: {{ request()->routeIs('client.category.*') ? 'true' : 'false' }} }">
@@ -146,36 +126,40 @@
                     </div>
                 </div>
 
-                <!-- Clients Menu -->
-                <div x-data="{ open: {{ request()->routeIs('client.client.*') ? 'true' : 'false' }} }">
+
+                <!-- Document Menu -->
+
+                <div x-data="{ open: {{ request()->routeIs('client.document.*') ? 'true' : 'false' }} }">
                     <button @click="open = !open"
                         class="w-full flex items-center justify-between px-4 py-3 rounded-xl transition-colors duration-200
-                        {{ request()->routeIs('client.client.*') ? 'text-white bg-slate-800' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        {{ request()->routeIs('client.document.*') ? 'text-white bg-slate-800' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                         <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-users w-5"></i>
-                            <span>Clients</span>
+                            <i class="fa-solid fa-folder-open w-5"></i>
+                            <span>Documents</span>
                         </div>
                         <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200"
                             :class="open ? 'rotate-180' : ''"></i>
                     </button>
 
                     <div x-show="open" x-cloak class="pl-12 pr-2 py-2 space-y-1">
-                        <a href="{{ route('client.client.index') }}"
-                            class="block py-2 text-sm hover:text-white {{ request()->routeIs('client.client.index') ? 'text-blue-400' : 'text-slate-400' }}">
-                            All Clients
+                        <a href="{{ route('client.document.index') }}"
+                            class="block py-2 text-sm hover:text-white {{ request()->routeIs('client.document.index') ? 'text-blue-400' : 'text-slate-400' }}">
+                            All Documents
                         </a>
-                        <a href="{{ route('client.client.create') }}"
-                            class="block py-2 text-sm hover:text-white {{ request()->routeIs('client.client.create') ? 'text-blue-400' : 'text-slate-400' }}">
+                        <a href="{{ route('client.document.create') }}"
+                            class="block py-2 text-sm hover:text-white {{ request()->routeIs('client.document.create') ? 'text-blue-400' : 'text-slate-400' }}">
                             Add New
                         </a>
-                        <a href="{{ route('client.client.trash') }}"
-                            class="block py-2 text-sm hover:text-white {{ request()->routeIs('client.client.trash') ? 'text-blue-400' : 'text-slate-400' }}">
+                        <a href="{{ route('client.document.trash') }}"
+                            class="block py-2 text-sm hover:text-white {{ request()->routeIs('client.document.trash') ? 'text-blue-400' : 'text-slate-400' }}">
                             Trash
                         </a>
                     </div>
                 </div>
 
-                <a href="#" @click="sidebarOpen=false"
+
+
+                <!-- <a href="#" @click="sidebarOpen=false"
                     class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 hover:text-white">
                     <i class="fa-solid fa-file-invoice-dollar w-5"></i> Invoices
                 </a>
@@ -183,7 +167,7 @@
                 <a href="#" @click="sidebarOpen=false"
                     class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 hover:text-white">
                     <i class="fa-solid fa-chart-pie w-5"></i> Reports
-                </a>
+                </a> -->
             </nav>
 
             <!-- Sidebar User -->

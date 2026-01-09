@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\client\BusinessController;
 use App\Http\Controllers\client\ClientController;
 use App\Http\Controllers\client\ProfileController;
 use App\Http\Controllers\client\DocumentController;
@@ -39,21 +40,14 @@ Route::middleware(['auth', 'client'])->group(function () {
     Route::get('/client/category/restore/{id}', [DocumentCategoryController::class, 'restore'])->name('client.category.restore');
     Route::get('/client/category/force-delete/{id}', [DocumentCategoryController::class, 'forceDelete'])->name('client.category.forceDelete');
 
-    // ================== Client Routes ==================
-    Route::get('/client/client/index', [ClientController::class, 'index'])->name('client.client.index');
-    Route::get('/client/client/create', [ClientController::class, 'create'])->name('client.client.create');
-    Route::post('/client/client/create', [ClientController::class, 'store'])->name('client.client.store');
-    Route::get('/client/client/view/{id}', [ClientController::class, 'view'])->name('client.client.view');
-    Route::get('/client/client/edit/{id}', [ClientController::class, 'edit'])->name('client.client.edit');
-    Route::post('/client/client/update/{id}', [ClientController::class, 'update'])->name('client.client.update');
-    Route::get('/client/client/delete/{id}', [ClientController::class, 'destroy'])->name('client.client.delete');
-    Route::get('/client/client/trash', [ClientController::class, 'trash'])->name('client.client.trash');
-    Route::get('/client/client/restore/{id}', [ClientController::class, 'restore'])->name('client.client.restore');
-    Route::get('/client/client/force-delete/{id}', [ClientController::class, 'forceDelete'])->name('client.client.forceDelete');
 
     // ================== Service Routes (Selection) ==================
     Route::get('/client/services', [ServiceController::class, 'index'])->name('client.services.index');
     Route::post('/client/services', [ServiceController::class, 'update'])->name('client.services.update');
+
+    // ================== Business Routes ==================
+    Route::get('/client/business', [BusinessController::class, 'index'])->name('client.business.index');
+    Route::post('/client/business', [BusinessController::class, 'update'])->name('client.business.update');
 
 });
 require __DIR__ . '/auth.php';

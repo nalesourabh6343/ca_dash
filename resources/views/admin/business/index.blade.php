@@ -45,7 +45,7 @@
                                     {{ $business->business_name }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $business->client_name }}
+                                    {{ $business->client->name ?? 'N/A' }}
                                 </td>
                                 <td class="px-6 py-4">
                                     <div>GST: {{ $business->gst_number ?? 'N/A' }}</div>

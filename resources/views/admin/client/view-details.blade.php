@@ -130,7 +130,7 @@
                                     <th class="px-6 py-3 font-semibold">Category</th>
                                     <th class="px-6 py-3 font-semibold">Period</th>
                                     <th class="px-6 py-3 font-semibold">Status</th>
-                                    <th class="px-6 py-3 font-semibold text-right">View</th>
+                                    <th class="px-6 py-3 font-semibold text-right">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-100 dark:divide-slate-700">

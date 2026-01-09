@@ -1,11 +1,11 @@
-@extends('layouts.client.master')
+@extends('layouts.admin.master')
 @section('title', 'Trashed Clients')
 
 @section('content')
     <div class="container mx-auto max-w-7xl">
         <div class="flex justify-between items-center mb-6">
             <div class="flex items-center gap-4">
-                <a href="{{ route('client.client.index') }}"
+                <a href="{{ route('admin.client.index') }}"
                     class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition">
                     <i class="fa-solid fa-arrow-left"></i>
                 </a>
@@ -52,11 +52,11 @@
                                     {{ $client->deleted_at->diffForHumans() }}
                                 </td>
                                 <td class="px-6 py-4 text-right space-x-2">
-                                    <a href="{{ route('client.client.restore', $client->client_id) }}"
+                                    <a href="{{ route('admin.client.restore', $client->client_id) }}"
                                         class="text-emerald-600 hover:text-emerald-800" title="Restore">
                                         <i class="fa-solid fa-rotate-left"></i> Restore
                                     </a>
-                                    <a href="{{ route('client.client.forceDelete', $client->client_id) }}"
+                                    <a href="{{ route('admin.client.forceDelete', $client->client_id) }}"
                                         class="text-red-600 hover:text-red-800" title="Permanently Delete"
                                         onclick="return confirm('Are you sure? This cannot be undone.')">
                                         <i class="fa-solid fa-ban"></i> Delete

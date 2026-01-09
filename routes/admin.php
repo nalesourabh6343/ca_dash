@@ -27,6 +27,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/service/restore/{id}', [ServiceController::class, 'restore'])->name('admin.service.restore');
     Route::get('/admin/service/force-delete/{id}', [ServiceController::class, 'forceDelete'])->name('admin.service.forceDelete');
 
+    // Add here client route
+
+
     // ================== Business Routes ==================
     Route::get('/admin/business/index', [BusinessController::class, 'index'])->name('admin.business.index');
     Route::get('/admin/business/create', [BusinessController::class, 'create'])->name('admin.business.create');
@@ -40,7 +43,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // ================== Client Routes (Admin View) ==================
     Route::get('/admin/client/index', [ClientController::class, 'index'])->name('admin.client.index');
+    Route::get('/admin/client/create', [ClientController::class, 'create'])->name('admin.client.create');
+    Route::post('/admin/client/create', [ClientController::class, 'store'])->name('admin.client.store');
     Route::get('/admin/client/view/{id}', [ClientController::class, 'show'])->name('admin.client.view');
+    Route::get('/admin/client/edit/{id}', [ClientController::class, 'edit'])->name('admin.client.edit');
+    Route::post('/admin/client/update/{id}', [ClientController::class, 'update'])->name('admin.client.update');
+    Route::get('/admin/client/delete/{id}', [ClientController::class, 'destroy'])->name('admin.client.delete');
+    Route::get('/admin/client/trash', [ClientController::class, 'trash'])->name('admin.client.trash');
+    Route::get('/admin/client/restore/{id}', [ClientController::class, 'restore'])->name('admin.client.restore');
+    Route::get('/admin/client/force-delete/{id}', [ClientController::class, 'forceDelete'])->name('admin.client.forceDelete');
 
 });
 require __DIR__ . '/auth.php';
