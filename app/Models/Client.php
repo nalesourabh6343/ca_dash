@@ -22,4 +22,14 @@ class Client extends Model
     {
         return $this->belongsToMany(Service::class, 'client_service', 'client_id', 'service_id');
     }
+
+    public function businesses()
+    {
+        return $this->hasMany(Business::class, 'client_id', 'client_id');
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class, 'client_id', 'client_id');
+    }
 }

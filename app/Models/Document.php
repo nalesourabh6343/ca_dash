@@ -17,4 +17,14 @@ class Document extends Model
      * Everything else is mass assignable
      */
     protected $guarded = ['document_id'];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id', 'client_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(DocumentCategory::class, 'pk_document_categorie_id', 'document_categorie_id');
+    }
 }

@@ -150,6 +150,11 @@
                     </div>
                 </div>
 
+                <a href="{{ route('admin.client.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.client.*') ? 'bg-slate-800 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                    <i class="fa-solid fa-users w-5"></i> Clients
+                </a>
+
                 <a href="#" @click="sidebarOpen=false"
                     class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 hover:text-white">
                     <i class="fa-solid fa-chart-pie w-5"></i> Reports

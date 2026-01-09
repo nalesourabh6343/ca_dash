@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\ProfileController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\BusinessController;
+use App\Http\Controllers\admin\ClientController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -36,6 +37,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/business/trash', [BusinessController::class, 'trash'])->name('admin.business.trash');
     Route::get('/admin/business/restore/{id}', [BusinessController::class, 'restore'])->name('admin.business.restore');
     Route::get('/admin/business/force-delete/{id}', [BusinessController::class, 'forceDelete'])->name('admin.business.forceDelete');
+
+    // ================== Client Routes (Admin View) ==================
+    Route::get('/admin/client/index', [ClientController::class, 'index'])->name('admin.client.index');
+    Route::get('/admin/client/view/{id}', [ClientController::class, 'show'])->name('admin.client.view');
 
 });
 require __DIR__ . '/auth.php';
