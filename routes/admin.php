@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\ProfileController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\BusinessController;
 use App\Http\Controllers\admin\ClientController;
+use App\Http\Controllers\admin\TaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -52,6 +53,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/client/trash', [ClientController::class, 'trash'])->name('admin.client.trash');
     Route::get('/admin/client/restore/{id}', [ClientController::class, 'restore'])->name('admin.client.restore');
     Route::get('/admin/client/force-delete/{id}', [ClientController::class, 'forceDelete'])->name('admin.client.forceDelete');
+
+    // ================== Task Routes ==================
+    Route::get('/admin/tasks/index', [TaskController::class, 'index'])->name('admin.tasks.index');
+    Route::get('/admin/tasks/create', [TaskController::class, 'create'])->name('admin.tasks.create');
+    Route::post('/admin/tasks/create', [TaskController::class, 'store'])->name('admin.tasks.store');
+    Route::get('/admin/tasks/view/{id}', [TaskController::class, 'show'])->name('admin.tasks.view');
+    Route::get('/admin/tasks/edit/{id}', [TaskController::class, 'edit'])->name('admin.tasks.edit');
+    Route::post('/admin/tasks/update/{id}', [TaskController::class, 'update'])->name('admin.tasks.update');
+    Route::get('/admin/tasks/delete/{id}', [TaskController::class, 'destroy'])->name('admin.tasks.delete');
+    Route::get('/admin/tasks/trash', [TaskController::class, 'trash'])->name('admin.tasks.trash');
+    Route::get('/admin/tasks/restore/{id}', [TaskController::class, 'restore'])->name('admin.tasks.restore');
+    Route::get('/admin/tasks/force-delete/{id}', [TaskController::class, 'forceDelete'])->name('admin.tasks.forceDelete');
 
 });
 require __DIR__ . '/auth.php';

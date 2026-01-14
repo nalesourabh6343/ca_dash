@@ -177,6 +177,44 @@
                     
                 </div>
 
+
+
+  <!-- Tasks Menu -->
+                <div x-data="{ open: {{ request()->routeIs('admin.tasks.*') ? 'true' : 'false' }} }">
+                    <button @click="open = !open"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-xl transition-colors duration-200
+                        {{ request()->routeIs('admin.tasks.*') ? 'text-white bg-slate-800' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-list-check w-5"></i>
+                            <span>Tasks</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200"
+                            :class="open ? 'rotate-180' : ''"></i>
+                    </button>
+
+                    <div x-show="open" x-cloak class="pl-12 pr-2 py-2 space-y-1">
+                        <a href="{{ route('admin.tasks.index') }}"
+                            class="block py-2 text-sm hover:text-white {{ request()->routeIs('admin.tasks.index') ? 'text-blue-400' : 'text-slate-400' }}">
+                            All Tasks
+                        </a>
+                        <a href="{{ route('admin.tasks.create') }}"
+                            class="block py-2 text-sm hover:text-white {{ request()->routeIs('admin.tasks.create') ? 'text-blue-400' : 'text-slate-400' }}">
+                            Add New
+                        </a>
+                        <a href="{{ route('admin.tasks.trash') }}"
+                            class="block py-2 text-sm hover:text-white {{ request()->routeIs('admin.tasks.trash') ? 'text-blue-400' : 'text-slate-400' }}">
+                            Trash
+                        </a>
+                    </div>
+
+
+                    
+                </div>
+
+
+
+             
+
                 <!-- <a href="{{ route('admin.client.index') }}"
                     class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.client.*') ? 'bg-slate-800 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                     <i class="fa-solid fa-users w-5"></i> Clients
