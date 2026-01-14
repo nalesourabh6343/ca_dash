@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\BusinessController;
 use App\Http\Controllers\admin\ClientController;
 use App\Http\Controllers\admin\TaskController;
+use App\Http\Controllers\admin\StaffController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -65,6 +66,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/tasks/trash', [TaskController::class, 'trash'])->name('admin.tasks.trash');
     Route::get('/admin/tasks/restore/{id}', [TaskController::class, 'restore'])->name('admin.tasks.restore');
     Route::get('/admin/tasks/force-delete/{id}', [TaskController::class, 'forceDelete'])->name('admin.tasks.forceDelete');
+
+    // ================== Staff Routes ==================
+    Route::get('/admin/staffs/index', [StaffController::class, 'index'])->name('admin.staffs.index');
+    Route::get('/admin/staffs/create', [StaffController::class, 'create'])->name('admin.staffs.create');
+    Route::post('/admin/staffs/create', [StaffController::class, 'store'])->name('admin.staffs.store');
+    Route::get('/admin/staffs/view/{id}', [StaffController::class, 'show'])->name('admin.staffs.view');
+    Route::get('/admin/staffs/edit/{id}', [StaffController::class, 'edit'])->name('admin.staffs.edit');
+    Route::post('/admin/staffs/update/{id}', [StaffController::class, 'update'])->name('admin.staffs.update');
+    Route::get('/admin/staffs/delete/{id}', [StaffController::class, 'destroy'])->name('admin.staffs.delete');
+    Route::get('/admin/staffs/trash', [StaffController::class, 'trash'])->name('admin.staffs.trash');
+    Route::get('/admin/staffs/restore/{id}', [StaffController::class, 'restore'])->name('admin.staffs.restore');
+    Route::get('/admin/staffs/force-delete/{id}', [StaffController::class, 'forceDelete'])->name('admin.staffs.forceDelete');
 
 });
 require __DIR__ . '/auth.php';
