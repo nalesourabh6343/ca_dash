@@ -7,9 +7,14 @@ use App\Http\Controllers\admin\BusinessController;
 use App\Http\Controllers\admin\ClientController;
 use App\Http\Controllers\admin\TaskController;
 use App\Http\Controllers\admin\StaffController;
+use App\Http\Controllers\admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'admin'])->group(function () {
+    // ================== User Management ==================
+    Route::get('/admin/users/index', [UserController::class, 'index'])->name('admin.users.index');
+    Route::post('/admin/users/update-status/{id}', [UserController::class, 'updateStatus'])->name('admin.users.updateStatus');
+    Route::get('/admin/users/delete/{id}', [UserController::class, 'destroy'])->name('admin.users.delete');
 
     // ================== Dashboard ==================
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');

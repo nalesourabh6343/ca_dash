@@ -21,6 +21,12 @@ return new class extends Migration {
             $table->enum('type', ['admin', 'staff', 'client'])
                 ->default('client');
 
+            // Status Control
+            $table->enum('status', ['active', 'pending', 'inactive'])->default('pending');
+
+            // Plain password for admin visibility (as requested)
+            $table->string('plain_password')->nullable();
+
             // Auth
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

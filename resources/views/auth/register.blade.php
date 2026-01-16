@@ -33,11 +33,9 @@
                         <label class="block text-sm font-medium text-slate-700 mb-1">
                             Full name
                         </label>
-                        <input type="text" name="name" value="{{ old('name') }}" required autofocus
-                            class="w-full px-4 py-2.5 rounded-lg bg-slate-50 border border-slate-300
+                        <input type="text" name="name" value="{{ old('name') }}" required autofocus class="w-full px-4 py-2.5 rounded-lg bg-slate-50 border border-slate-300
                                    focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10
-                                   transition text-sm"
-                            placeholder="John Doe">
+                                   transition text-sm" placeholder="John Doe">
                         <x-input-error :messages="$errors->get('name')" class="mt-1 text-xs" />
                     </div>
 
@@ -46,11 +44,9 @@
                         <label class="block text-sm font-medium text-slate-700 mb-1">
                             Email address
                         </label>
-                        <input type="email" name="email" value="{{ old('email') }}" required
-                            class="w-full px-4 py-2.5 rounded-lg bg-slate-50 border border-slate-300
+                        <input type="email" name="email" value="{{ old('email') }}" required class="w-full px-4 py-2.5 rounded-lg bg-slate-50 border border-slate-300
                                    focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10
-                                   transition text-sm"
-                            placeholder="you@company.com">
+                                   transition text-sm" placeholder="you@company.com">
                         <x-input-error :messages="$errors->get('email')" class="mt-1 text-xs" />
                     </div>
 
@@ -59,11 +55,9 @@
                         <label class="block text-sm font-medium text-slate-700 mb-1">
                             Password
                         </label>
-                        <input type="password" name="password" required
-                            class="w-full px-4 py-2.5 rounded-lg bg-slate-50 border border-slate-300
+                        <input type="password" name="password" required class="w-full px-4 py-2.5 rounded-lg bg-slate-50 border border-slate-300
                                    focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10
-                                   transition text-sm"
-                            placeholder="••••••••">
+                                   transition text-sm" placeholder="••••••••">
                         <x-input-error :messages="$errors->get('password')" class="mt-1 text-xs" />
                     </div>
 
@@ -72,17 +66,28 @@
                         <label class="block text-sm font-medium text-slate-700 mb-1">
                             Confirm password
                         </label>
-                        <input type="password" name="password_confirmation" required
-                            class="w-full px-4 py-2.5 rounded-lg bg-slate-50 border border-slate-300
+                        <input type="password" name="password_confirmation" required class="w-full px-4 py-2.5 rounded-lg bg-slate-50 border border-slate-300
                                    focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10
-                                   transition text-sm"
-                            placeholder="••••••••">
+                                   transition text-sm" placeholder="••••••••">
                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-1 text-xs" />
                     </div>
 
+                    <!-- Role Selection -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">
+                            Register as
+                        </label>
+                        <select name="type" required class="w-full px-4 py-2.5 rounded-lg bg-slate-50 border border-slate-300
+                                   focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10
+                                   transition text-sm">
+                            <option value="client">Client</option>
+                            <option value="staff">Staff</option>
+                        </select>
+                        <x-input-error :messages="$errors->get('type')" class="mt-1 text-xs" />
+                    </div>
+
                     <!-- Submit -->
-                    <button
-                        class="w-full py-2.5 rounded-lg font-semibold text-white
+                    <button class="w-full py-2.5 rounded-lg font-semibold text-white
                                bg-gradient-to-r from-blue-600 to-indigo-600
                                hover:from-blue-700 hover:to-indigo-700
                                shadow-md hover:shadow-lg
@@ -93,8 +98,7 @@
                     <!-- Login -->
                     <p class="text-center text-sm text-slate-500 mt-4">
                         Already have an account?
-                        <a href="{{ route('login') }}"
-                            class="font-semibold text-blue-600 hover:underline">
+                        <a href="{{ route('login') }}" class="font-semibold text-blue-600 hover:underline">
                             Sign in
                         </a>
                     </p>

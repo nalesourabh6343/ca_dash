@@ -12,13 +12,34 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
+    Route::get('register', function () {
+        return redirect()->route('register.client'); // Default to client
+    })->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::get('register/client', [RegisteredUserController::class, 'createClient'])
+        ->name('register.client');
+    Route::post('register/client', [RegisteredUserController::class, 'storeClient']);
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-        ->name('login');
+    Route::get('register/staff', [RegisteredUserController::class, 'createStaff'])
+        ->name('register.staff');
+    Route::post('register/staff', [RegisteredUserController::class, 'storeStaff']);
+
+    Route::get('register/admin', [RegisteredUserController::class, 'createAdmin'])
+        ->name('register.admin');
+    Route::post('register/admin', [RegisteredUserController::class, 'storeAdmin']);
+
+    Route::get('login/admin', [AuthenticatedSessionController::class, 'createAdmin'])->name('login.admin');
+    Route::post('login/admin', [AuthenticatedSessionController::class, 'storeAdmin']);
+
+    Route::get('login/client', [AuthenticatedSessionController::class, 'createClient'])->name('login.client');
+    Route::post('login/client', [AuthenticatedSessionController::class, 'storeClient']);
+
+    Route::get('login/staff', [AuthenticatedSessionController::class, 'createStaff'])->name('login.staff');
+    Route::post('login/staff', [AuthenticatedSessionController::class, 'storeStaff']);
+
+    Route::get('login', function () {
+        return redirect()->route('login.client');
+    })->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 

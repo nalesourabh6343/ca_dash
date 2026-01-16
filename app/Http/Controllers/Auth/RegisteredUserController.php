@@ -14,20 +14,44 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
-    public function create(): View
+    /** Display Client registration form */
+    public function createClient(): View
     {
-        return view('auth.register');
+        return view('auth.register-client');
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request): RedirectResponse
+    /** Display Staff registration form */
+    public function createStaff(): View
+    {
+        return view('auth.register-staff');
+    }
+
+    /** Display Admin registration form */
+    public function createAdmin(): View
+    {
+        return view('auth.register-admin');
+    }
+
+    /** Handle Client registration */
+    public function storeClient(Request $request): RedirectResponse
+    {
+        return $this->processRegistration($request, 'client');
+    }
+
+    /** Handle Staff registration */
+    public function storeStaff(Request $request): RedirectResponse
+    {
+        return $this->processRegistration($request, 'staff');
+    }
+
+    /** Handle Admin registration */
+    public function storeAdmin(Request $request): RedirectResponse
+    {
+        return $this->processRegistration($request, 'admin');
+    }
+
+    /** Unified processing logic */
+    protected function processRegistration(Request $request, $type): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -39,12 +63,13 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'plain_password' => $request->password,
+            'type' => $type,
+            'status' => 'pending',
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
-
-        return redirect(route('admin.dashboard', absolute: false));
+        return redirect()->route("login.$type")->with('status', 'Registration as ' . ucfirst($type) . ' successful! Please wait for Admin approval.');
     }
 }
