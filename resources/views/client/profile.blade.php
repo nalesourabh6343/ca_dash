@@ -39,25 +39,25 @@
 
                 <!-- About Us Section (Maybe irrelevant for Client, but keeping per request) -->
                 <!-- <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
-                        <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
-                            <i class="fa-solid fa-circle-info text-blue-500"></i> About Us Content
-                        </h3>
-                        <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">
-                            Update the "About Us" information displayed on the website.
-                        </p>
-                        <form action="#" method="POST"> 
-                            @csrf
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Company Description</label>
-                                    <textarea rows="4" class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter company description here..."></textarea>
+                            <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-info text-blue-500"></i> About Us Content
+                            </h3>
+                            <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">
+                                Update the "About Us" information displayed on the website.
+                            </p>
+                            <form action="#" method="POST"> 
+                                @csrf
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Company Description</label>
+                                        <textarea rows="4" class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:border-blue-500 focus:ring-blue-500" placeholder="Enter company description here..."></textarea>
+                                    </div>
+                                    <button type="button" class="w-full px-4 py-2 bg-slate-800 dark:bg-slate-700 text-white rounded-lg hover:bg-slate-700 dark:hover:bg-slate-600 transition">
+                                        Save Information
+                                    </button>
                                 </div>
-                                <button type="button" class="w-full px-4 py-2 bg-slate-800 dark:bg-slate-700 text-white rounded-lg hover:bg-slate-700 dark:hover:bg-slate-600 transition">
-                                    Save Information
-                                </button>
-                            </div>
-                        </form>
-                    </div> -->
+                            </form>
+                        </div> -->
             </div>
 
             <!-- Right Column: Profile & Password Forms -->
@@ -121,7 +121,8 @@
                         <i class="fa-solid fa-lock text-emerald-500"></i> Update Password
                     </h3>
 
-                    <form method="post" action="{{ route('password.update') }}" class="space-y-6">
+                    <form method="post" action="{{ route('password.update') }}" class="space-y-6"
+                        x-data="{ showCurrent: false, showNew: false, showConfirm: false }">
                         @csrf
                         @method('put')
 
@@ -129,9 +130,15 @@
                             <label for="current_password"
                                 class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Current
                                 Password</label>
-                            <input id="current_password" name="current_password" type="password"
-                                autocomplete="current-password"
-                                class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:border-emerald-500 focus:ring-emerald-500">
+                            <div class="relative">
+                                <input id="current_password" name="current_password"
+                                    :type="showCurrent ? 'text' : 'password'" autocomplete="current-password"
+                                    class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:border-emerald-500 focus:ring-emerald-500 pr-10">
+                                <button type="button" @click="showCurrent = !showCurrent"
+                                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
+                                    <i class="fa-solid" :class="showCurrent ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                </button>
+                            </div>
                             @if($errors->updatePassword->get('current_password'))
                                 <p class="mt-2 text-sm text-red-600">{{ $errors->updatePassword->get('current_password')[0] }}
                                 </p>
@@ -143,8 +150,15 @@
                                 <label for="password"
                                     class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">New
                                     Password</label>
-                                <input id="password" name="password" type="password" autocomplete="new-password"
-                                    class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:border-emerald-500 focus:ring-emerald-500">
+                                <div class="relative">
+                                    <input id="password" name="password" :type="showNew ? 'text' : 'password'"
+                                        autocomplete="new-password"
+                                        class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:border-emerald-500 focus:ring-emerald-500 pr-10">
+                                    <button type="button" @click="showNew = !showNew"
+                                        class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
+                                        <i class="fa-solid" :class="showNew ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                    </button>
+                                </div>
                                 @if($errors->updatePassword->get('password'))
                                     <p class="mt-2 text-sm text-red-600">{{ $errors->updatePassword->get('password')[0] }}</p>
                                 @endif
@@ -154,12 +168,19 @@
                                 <label for="password_confirmation"
                                     class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Confirm
                                     Password</label>
-                                <input id="password_confirmation" name="password_confirmation" type="password"
-                                    autocomplete="new-password"
-                                    class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:border-emerald-500 focus:ring-emerald-500">
+                                <div class="relative">
+                                    <input id="password_confirmation" name="password_confirmation"
+                                        :type="showConfirm ? 'text' : 'password'" autocomplete="new-password"
+                                        class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 focus:border-emerald-500 focus:ring-emerald-500 pr-10">
+                                    <button type="button" @click="showConfirm = !showConfirm"
+                                        class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
+                                        <i class="fa-solid" :class="showConfirm ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                    </button>
+                                </div>
                                 @if($errors->updatePassword->get('password_confirmation'))
                                     <p class="mt-2 text-sm text-red-600">
-                                        {{ $errors->updatePassword->get('password_confirmation')[0] }}</p>
+                                        {{ $errors->updatePassword->get('password_confirmation')[0] }}
+                                    </p>
                                 @endif
                             </div>
                         </div>
