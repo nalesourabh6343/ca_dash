@@ -15,6 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'client' => \App\Http\Middleware\ClientMiddleware::class,
             'staff' => \App\Http\Middleware\StaffMiddleware::class,
+            'check.status' => \App\Http\Middleware\CheckUserStatus::class,
+        ]);
+
+        $middleware->web(append: [
+            \App\Http\Middleware\CheckUserStatus::class,
         ]);
     })
 
