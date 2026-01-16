@@ -70,6 +70,10 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        return redirect()->route("login.$type")->with('status', 'Registration as ' . ucfirst($type) . ' successful! Please wait for Admin approval.');
+        $message = ($type === 'admin')
+            ? 'Registration as Admin successful! You can now log in.'
+            : 'Registration as ' . ucfirst($type) . ' successful! Please wait for Admin approval.';
+
+        return redirect()->route("login.$type")->with('status', $message);
     }
 }
