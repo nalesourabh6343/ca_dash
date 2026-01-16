@@ -32,4 +32,9 @@ class Client extends Model
     {
         return $this->hasMany(Document::class, 'client_id', 'client_id');
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'client_id', 'client_id');
+    }
 }

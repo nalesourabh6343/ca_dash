@@ -18,7 +18,7 @@
             class="group bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-slate-200 dark:border-slate-700 p-6 flex items-start justify-between relative overflow-hidden">
             <div class="relative z-10">
                 <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Assigned Clients</p>
-                <h3 class="text-3xl font-bold text-slate-800 dark:text-white mt-3">28</h3>
+                <h3 class="text-3xl font-bold text-slate-800 dark:text-white mt-3">{{ $assignedClientsCount }}</h3>
                 <p
                     class="text-xs font-semibold text-green-500 mt-2 flex items-center gap-1 bg-green-50 dark:bg-green-900/30 w-fit px-2 py-1 rounded-full">
                     <i class="fa-solid fa-arrow-trend-up"></i> Active
@@ -39,10 +39,10 @@
             class="group bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-slate-200 dark:border-slate-700 p-6 flex items-start justify-between relative overflow-hidden">
             <div class="relative z-10">
                 <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Tasks Today</p>
-                <h3 class="text-3xl font-bold text-slate-800 dark:text-white mt-3">12</h3>
+                <h3 class="text-3xl font-bold text-slate-800 dark:text-white mt-3">{{ $tasksTodayCount }}</h3>
                 <p
                     class="text-xs font-semibold text-green-500 mt-2 flex items-center gap-1 bg-green-50 dark:bg-green-900/30 w-fit px-2 py-1 rounded-full">
-                    <i class="fa-solid fa-check"></i> 8 Completed
+                    <i class="fa-solid fa-check"></i> {{ $tasksCompletedTodayCount }} Completed
                 </p>
             </div>
             <div
@@ -60,7 +60,7 @@
             class="group bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-slate-200 dark:border-slate-700 p-6 flex items-start justify-between relative overflow-hidden">
             <div class="relative z-10">
                 <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Pending Actions</p>
-                <h3 class="text-3xl font-bold text-slate-800 dark:text-white mt-3">4</h3>
+                <h3 class="text-3xl font-bold text-slate-800 dark:text-white mt-3">{{ $pendingTasksCount }}</h3>
                 <p
                     class="text-xs font-semibold text-amber-500 mt-2 flex items-center gap-1 bg-amber-50 dark:bg-amber-900/30 w-fit px-2 py-1 rounded-full">
                     <i class="fa-solid fa-circle-exclamation"></i> Follow-ups

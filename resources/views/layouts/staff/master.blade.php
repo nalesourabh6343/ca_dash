@@ -83,8 +83,8 @@
                     <i class="fa-solid fa-gauge w-5"></i> Dashboard
                 </a>
 
-                <a href="#" @click="sidebarOpen=false"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 hover:text-white">
+                <a href="{{ route('staff.client.index') }}" @click="sidebarOpen=false"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('staff.client.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
                     <i class="fa-solid fa-users w-5"></i> Clients
                 </a>
 
