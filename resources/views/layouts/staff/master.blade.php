@@ -88,6 +88,11 @@
                     <i class="fa-solid fa-users w-5"></i> Clients
                 </a>
 
+                <a href="{{ route('staff.tasks.index') }}" @click="sidebarOpen=false"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('staff.tasks.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                    <i class="fa-solid fa-list-check w-5"></i> My Tasks
+                </a>
+
                 <a href="#" @click="sidebarOpen=false"
                     class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:bg-slate-800 hover:text-white">
                     <i class="fa-solid fa-file-invoice-dollar w-5"></i> Invoices
