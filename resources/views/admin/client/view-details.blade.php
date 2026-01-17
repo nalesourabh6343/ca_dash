@@ -149,12 +149,10 @@
                                             {{ \Carbon\Carbon::parse($doc->period_end)->format('M Y') }}
                                         </td>
                                         <td class="px-6 py-3">
-                                            @if($doc->status == 'approved')
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Approved</span>
-                                            @elseif($doc->status == 'rejected')
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Rejected</span>
-                                            @elseif($doc->status == 'reviewed')
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Reviewed</span>
+                                            @if($doc->status == 'completed')
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Completed</span>
+                                            @elseif($doc->status == 'in_progress')
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">In Progress</span>
                                             @else
                                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>
                                             @endif

@@ -40,4 +40,36 @@ class ClientController extends Controller
         }
         return view('staff.client.view-details', compact('client'));
     }
+
+    /**
+     * Update status of a client's document
+     */
+    public function updateDocumentStatus(Request $request, $id, $documentId)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,in_progress,completed',
+        ]);
+
+        // Verify client assignment
+        $client = Client::where('client_id', $id)
+            ->whereHas('tasks', function ($query) {
+                $query->where('staff_id', auth()->id());
+            })->first();
+
+        if (!$client) {
+            return back()->with('error', 'Access Denied');
+        }
+
+        $document = \App\Models\Document::where('document_id', $documentId)
+            ->where('client_id', $id)
+            ->first();
+
+        if ($document) {
+            $document->status = $request->status;
+            $document->save();
+            return back()->with('msg', 'Document status updated');
+        }
+
+        return back()->with('error', 'Document not found');
+    }
 }

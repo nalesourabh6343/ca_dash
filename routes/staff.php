@@ -17,6 +17,7 @@ Route::middleware(['auth', 'staff'])->group(function () {
     // ================== Client Management ==================
     Route::get('/staff/client/index', [ClientController::class, 'index'])->name('staff.client.index');
     Route::get('/staff/client/view/{id}', [ClientController::class, 'show'])->name('staff.client.view');
+    Route::post('/staff/client/document/status/{id}/{documentId}', [ClientController::class, 'updateDocumentStatus'])->name('staff.client.document.status');
 
     // ================== Task Management ==================
     Route::get('/staff/tasks/index', [TaskController::class, 'index'])->name('staff.tasks.index');

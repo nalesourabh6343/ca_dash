@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('file_name');
             $table->date('period_start');
             $table->date('period_end');
-            $table->enum('status', ['pending', 'reviewed', 'approved', 'rejected'])->default('pending');
+            $table->enum('status', ['pending', 'in_progress', 'completed'])->default('pending');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();

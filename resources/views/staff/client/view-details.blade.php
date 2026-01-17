@@ -146,15 +146,17 @@
                                             {{ \Carbon\Carbon::parse($doc->period_end)->format('M Y') }}
                                         </td>
                                         <td class="px-6 py-3">
-                                            @if($doc->status == 'approved')
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Approved</span>
-                                            @elseif($doc->status == 'rejected')
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Rejected</span>
-                                            @elseif($doc->status == 'reviewed')
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Reviewed</span>
-                                            @else
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">Pending</span>
-                                            @endif
+                                            <form action="{{ route('staff.client.document.status', ['id' => $client->client_id, 'documentId' => $doc->document_id]) }}" method="POST">
+                                                @csrf
+                                                <select name="status" onchange="this.form.submit()" class="text-xs rounded-full border-0 px-3 py-1 font-medium ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-xs sm:leading-6
+                                                    {{ $doc->status == 'completed' ? 'bg-green-50 text-green-700 ring-green-600/20' : '' }}
+                                                    {{ $doc->status == 'pending' ? 'bg-yellow-50 text-yellow-800 ring-yellow-600/20' : '' }}
+                                                    {{ $doc->status == 'in_progress' ? 'bg-blue-50 text-blue-700 ring-blue-700/10' : '' }}">
+                                                    <option value="pending" {{ $doc->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                                    <option value="in_progress" {{ $doc->status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
+                                                    <option value="completed" {{ $doc->status == 'completed' ? 'selected' : '' }}>Completed</option>
+                                                </select>
+                                            </form>
                                         </td>
                                         <td class="px-6 py-3 text-right space-x-2">
                                             <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank" class="text-blue-600 hover:text-blue-800" title="View File">

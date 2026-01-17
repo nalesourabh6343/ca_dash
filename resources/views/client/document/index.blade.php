@@ -55,11 +55,10 @@
                                 <td class="px-6 py-4">
                                     <span
                                         class="px-2 py-1 text-xs rounded-full 
-                                                                {{ $doc->status == 'approved' ? 'bg-green-100 text-green-700' : '' }}
-                                                                {{ $doc->status == 'pending' ? 'bg-amber-100 text-amber-700' : '' }}
-                                                                {{ $doc->status == 'rejected' ? 'bg-red-100 text-red-700' : '' }}
-                                                                {{ $doc->status == 'reviewed' ? 'bg-blue-100 text-blue-700' : '' }}">
-                                        {{ ucfirst($doc->status) }}
+                                                {{ $doc->status == 'completed' ? 'bg-green-100 text-green-700' : '' }}
+                                                                        {{ $doc->status == 'pending' ? 'bg-amber-100 text-amber-700' : '' }}
+                                                                        {{ $doc->status == 'in_progress' ? 'bg-blue-100 text-blue-700' : '' }}">
+                                        {{ str_replace('_', ' ', ucfirst($doc->status)) }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 text-right space-x-2">
